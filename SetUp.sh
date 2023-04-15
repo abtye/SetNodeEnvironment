@@ -59,7 +59,7 @@ downloadVersion() {
     #
     versionLink=${versionLinks[$specificVersion-1]}
     wget -q $versionLink
-    tar -xvf node-*.tar.xz -q
+    tar -xvf node-*.tar.xz
     rm node-*.tar.xz
     mv node-* .node
     return 0
@@ -86,41 +86,33 @@ cnpm -v
 echo -e "\033[34m---------------------------------------\033[0m"
 echo -e "\033[34m初始化项目\033[0m"
 #
-wget -q "https://objects.githubusercontent.com/github-production-release-asset-2e65be/625408126/cbbd19f9-c38e-4ef6-97b7-79577d0c2ac3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230415%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230415T031845Z&X-Amz-Expires=300&X-Amz-Signature=d796ea11342a68545016af40df10c15f02e5bf76479813a7909505f6effe21e6&X-Amz-SignedHeaders=host&actor_id=123047756&key_id=0&repo_id=625408126&response-content-disposition=attachment%3B%20filename%3Dapp.tar.xz&response-content-type=application%2Foctet-stream"
-if [ $? != 0 ]; then
-    echo -e "\033[31m下载压缩包失败\033[0m"
-    echo -e "\033[32m[1]重新下载\033[0m"
-    echo -e "\033[32m[2]从兰奏云下载（不一定行）\033[0m"
-    echo -e "\033[32m[3]通过浏览器打开兰奏云下载页面（大概率行）\033[0m"
-    echo -e "\033[32m[4]通过浏览器打开GitHub下载页面（肯定行）\033[0m"
-    echo -e "\033[32m[5]用cnpm初始化（极其不推荐，神之bug，需要安装git）\033[0m"
-    read -rp "请选择解决方案: " choose
+echo -e "\033[32m[1]从兰奏云下载（不一定行）\033[0m"
+echo -e "\033[32m[2]通过浏览器打开兰奏云下载页面（大概率行）\033[0m"
+echo -e "\033[32m[3]通过浏览器打开GitHub下载页面（肯定行）\033[0m"
+echo -e "\033[32m[4]用cnpm初始化（极其不推荐，神之bug，需要安装git）\033[0m"
+read -rp "请选择解决方案: " choose
 #
-    case $choose in
-        1)
-            wget -cq "https://objects.githubusercontent.com/github-production-release-asset-2e65be/625408126/cbbd19f9-c38e-4ef6-97b7-79577d0c2ac3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230415%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230415T031845Z&X-Amz-Expires=300&X-Amz-Signature=d796ea11342a68545016af40df10c15f02e5bf76479813a7909505f6effe21e6&X-Amz-SignedHeaders=host&actor_id=123047756&key_id=0&repo_id=625408126&response-content-disposition=attachment%3B%20filename%3Dapp.tar.xz&response-content-type=application%2Foctet-stream"
-            ;;
-        2)
-            wget https://developer.lanzoug.com/file/?BmBbZQ8+U2IDCgM7ADVVOVNsAztRbwFzVyAGLlw3UCsEIgY3DztQaAIxBA1Tbl04AGcANFE/ADIGOAAwVjxXZQY3Wz8PdFNhAyYDaABsVWRTPAMxUToBN1diBjhcJlAhBHQGbA9gUDQCZgRhUyhdbABuACpRPwA3Bi4AMlY+V2MGZ1s/D2pTNANkA2IAMlU3UzoDYlFtAWdXZAYzXDZQNARlBjIPZ1A1AmUENlMwXWoAOwBgUTsAZgY5AChWPVcsBiBbeQ8hU2IDJwM8ADBVaVM6AzdRPQExV2MGMVw4UHcEcAY4Dz9QYQIyBG9TNl1qAGIANFE7ADAGNgA0VjNXbgYoWyIPdFNhAzkDIgBpVWRTLwNzUX4BdFdtBjFcNlBpBDUGZA9gUDICZQRjUz5degAvAGxRfgA/BjAAN1Y4V3gGMls7D3xTMQNhA3sAZlVlUzs=
-            ;;
-        3)
-            echo -e "\033[32m密码：1111\033[0m"
-            read -rp "按下回车键跳转"
-            xdg-open https://wwlf.lanzoue.com/iTgyQ0t1d4kd
-            ;;
-        4)
-            xdg-open https://github.com/abtye/SetNodeEnvironment/tags
-            ;;
-        5)
-            cnpm init electron-app@latest app
-            ;;
-        *)
-            echo -e "\033[31m错误的输入\033[0m"
-            ;;
-    esac
-fi
+case $choose in
+    1)
+        wget https://developer.lanzoug.com/file/?UDZbZQk4BTRWXwQ8AzZXO1FuBj5VawNxUiUDK102WyAGIAAxCT0EPAIxAQhTbgdiA2QBNQNtVGcEMwE2AmpaYlBhWzwJcgU3VnMEbwNvV2ZRMgY7VTMDOFJkAzNdJ1sqBnYAaglmBGACZgFkUygHNgNtASsDbVRjBCwBMAJrWmJQZ1s4CTEFZlY4BGcDYFduUTkGYlUzAzlSMQMxXTRbawYzAG8JMgRnAmcBblMzBzIDPAExA2xUNwQ0ASkCaVohUHZbeQknBTRWcgQ7AzNXa1E4BjJVOQMzUmYDNF05W3wGcgA+CTkENQIyAWpTNgcwA2EBNQNpVGMEMAE0Am5ab1B+WyIJcgU3VmwEJQNqV2ZRLQZ2VXoDdlJoAzRdN1tiBjcAYglhBGICZQFjUz4HIAMsAW0DLFRrBDIBNgJsWnVQZFs7CXoFZ1Y0BHwDZVdnUTk=
+        ;;
+    2)
+        echo -e "\033[32m密码：1111\033[0m"
+        read -rp "按下回车键跳转"
+        xdg-open https://wwlf.lanzoue.com/iASVR0t2emha
+        ;;
+    3)
+        xdg-open https://github.com/abtye/SetNodeEnvironment/tags
+        ;;
+    4)
+        cnpm init electron-app@latest app
+        ;;
+    *)
+        echo -e "\033[31m错误的输入\033[0m"
+        ;;
+esac
 #
-echo -e "\033[32m项目初始化成功，请将代码放置于./app/src下\033[0m"
+echo -e "\033[32m请将代码放置于~/app/src下\033[0m"
 echo -e "\033[31m！！！初始页面必须是index.html！！！\033[0m"
 echo -e "\033[31m！！！index.js必须保留！！！\033[0m"
 read -rp "脚本执行完成，按回车键退出"
