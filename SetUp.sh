@@ -21,13 +21,6 @@ if [ ${a:1:1} != 1 ];then
         fi
     fi
 fi
-# 检查是否安装git
-git --version
-if [ $? != 0 ];then
-    echo -e "\033[34m你好像没有安装git\033[0m"
-    read -rp "按下回车键安装git"
-    sudo apt install git
-fi
 #
 cd ~
 echo -e "\033[34m！！！本脚本只适用于从未搭建过Node环境的Linux64位版本！！！\033[0m"
@@ -86,15 +79,14 @@ cnpm -v
 echo -e "\033[34m---------------------------------------\033[0m"
 echo -e "\033[34m初始化项目\033[0m"
 #
-echo -e "\033[32m[1]从兰奏云下载（不一定行）\033[0m"
-echo -e "\033[32m[2]通过浏览器打开兰奏云下载页面（大概率行）\033[0m"
-echo -e "\033[32m[3]通过浏览器打开GitHub下载页面（肯定行）\033[0m"
-echo -e "\033[32m[4]用cnpm初始化（极其不推荐，神之bug，需要安装git）\033[0m"
+echo -e "\033[32m[1]通过浏览器打开GitHub下载页面（推荐）\033[0m"
+echo -e "\033[32m[2]通过浏览器打开兰奏云网盘下载页面\033[0m"
+echo -e "\033[32m[3]用cnpm初始化（极其不推荐，神之bug，需要安装git）\033[0m"
 read -rp "请选择解决方案: " choose
 #
 case $choose in
     1)
-        wget https://developer.lanzoug.com/file/?UDZbZQk4BTRWXwQ8AzZXO1FuBj5VawNxUiUDK102WyAGIAAxCT0EPAIxAQhTbgdiA2QBNQNtVGcEMwE2AmpaYlBhWzwJcgU3VnMEbwNvV2ZRMgY7VTMDOFJkAzNdJ1sqBnYAaglmBGACZgFkUygHNgNtASsDbVRjBCwBMAJrWmJQZ1s4CTEFZlY4BGcDYFduUTkGYlUzAzlSMQMxXTRbawYzAG8JMgRnAmcBblMzBzIDPAExA2xUNwQ0ASkCaVohUHZbeQknBTRWcgQ7AzNXa1E4BjJVOQMzUmYDNF05W3wGcgA+CTkENQIyAWpTNgcwA2EBNQNpVGMEMAE0Am5ab1B+WyIJcgU3VmwEJQNqV2ZRLQZ2VXoDdlJoAzRdN1tiBjcAYglhBGICZQFjUz4HIAMsAW0DLFRrBDIBNgJsWnVQZFs7CXoFZ1Y0BHwDZVdnUTk=
+        xdg-open https://github.com/abtye/SetNodeEnvironment/tags
         ;;
     2)
         echo -e "\033[32m密码：1111\033[0m"
@@ -102,10 +94,15 @@ case $choose in
         xdg-open https://wwlf.lanzoue.com/iASVR0t2emha
         ;;
     3)
-        xdg-open https://github.com/abtye/SetNodeEnvironment/tags
-        ;;
-    4)
-        cnpm init electron-app@latest app
+        # 检查是否安装git
+        git --version
+        if [ $? != 0 ];then
+            echo -e "\033[34m你好像没有安装git\033[0m"
+            read -rp "按下回车键安装git"
+            sudo apt install git
+        else
+            cnpm init electron-app@latest app
+        fi
         ;;
     *)
         echo -e "\033[31m错误的输入\033[0m"
