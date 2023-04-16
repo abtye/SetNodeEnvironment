@@ -1,5 +1,12 @@
 # 脚本功能：自动搭建Node环境和初始化Electron项目
 # 使用场景：从未搭建过Node环境的Linux64位版本
+# 检查是否安装git
+git --version
+if [ $? != 0 ];then
+    echo -e "\033[34m你好像没有安装git\033[0m"
+    read -rp "按下回车键安装git"
+    sudo apt install git
+fi
 #
 a=$(node -v)
 if [ ${a:1:1} != 1 ];then
@@ -94,15 +101,7 @@ case $choose in
         xdg-open https://wwlf.lanzoue.com/iASVR0t2emha
         ;;
     3)
-        # 检查是否安装git
-        git --version
-        if [ $? != 0 ];then
-            echo -e "\033[34m你好像没有安装git\033[0m"
-            read -rp "按下回车键安装git"
-            sudo apt install git
-        else
-            cnpm init electron-app@latest app
-        fi
+        cnpm init electron-app@latest app
         ;;
     *)
         echo -e "\033[31m错误的输入\033[0m"
