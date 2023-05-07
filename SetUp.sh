@@ -33,14 +33,14 @@ cd ~
 echo -e "\033[34m！！！本脚本只适用于从未搭建过Node环境的Linux64位版本！！！\033[0m"
 echo -e "\033[34m2023-04-14版本\033[0m"
 echo -e "\033[34m[1]长期维护版v18.16.0\033[0m"
-echo -e "\033[34m[2]最新尝鲜版v19.8.1\033[0m"
+echo -e "\033[34m[2]最新尝鲜版v20.1.0\033[0m"
 echo -e "\033[34m[3]17系列最新版v17.9.1\033[0m"
 echo -e "\033[34m[4]其他版本\033[0m"
 echo -e "\033[34m---------------------------------------\033[0m"
 #
 versionLinks=(
 "https://mirror.tuna.tsinghua.edu.cn/nodejs-release/v18.6.0/node-v18.6.0-linux-x64.tar.xz"
-"https://mirror.tuna.tsinghua.edu.cn/nodejs-release/v19.9.0/node-v19.9.0-linux-x64.tar.xz"
+"https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/v20.1.0/node-v20.1.0-linux-x64.tar.xz"
 "https://mirror.tuna.tsinghua.edu.cn/nodejs-release/v17.9.1/node-v17.9.1-linux-x64.tar.xz"
 )
 #
